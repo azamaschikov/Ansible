@@ -1,0 +1,21 @@
+---
+- name: "Add InfluxDB repository"
+  copy:
+    src: "influxdb.repo"
+    dest: "/etc/yum.repos.d/influxdb.repo"
+
+- name: "Install InfluxDB and Telegraf"
+  yum:
+    name: "{{ item }}"
+    state: "latest"
+  loop:
+  - "telegraf"
+  - "influxdb"
+
+- name: "Open port for InfluxDB"
+  firewalld:
+    port: "8086/tcp"
+    zone: "public"
+    permanent: "true"
+    state: "enabled"
+    immediate: "yes"

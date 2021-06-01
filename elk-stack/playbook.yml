@@ -1,0 +1,6 @@
+---
+- name: "Deployment stand-alone ELK"
+  hosts: "elk-stack"
+
+  roles:
+  - "elk-stack"

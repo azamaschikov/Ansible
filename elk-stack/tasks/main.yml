@@ -1,0 +1,49 @@
+---
+- name: "Install repositories"
+  copy:
+    src: "{{ item }}"
+    dest: "/etc/yum.repos.d"
+    owner: "root"
+    group: "root"
+    mode: "0644"
+  loop:
+  - "elasticsearch.repo"
+  - "kibana.repo"
+  - "nginx.repo"
+
+- name: "Install packages"
+  yum:
+    name: "{{ item }}"
+    state: "latest"
+  loop:
+    - "elasticsearch"
+    - "logstash"
+    - "kibana"
+    - "nginx"
+
+- name: "Start and enable services"
+  service:
+    name: "{{ item }}"
+    state: "started"
+    enabled: "yes"
+  loop:
+    - "elasticsearch"
+    - "logstash"
+    - "kibana"
+    - "nginx"
+
+- name: "Configure default virtual host"
+  copy:
+    src: "elk-vhost.conf"
+    dest: "/etc/nginx/conf.d/default.conf"
+    owner: "root"
+    group: "root"
+    mode: "0644"
+  notify: "Restart Nginx"
+
+- name: "Open port 80/tcp"
+  firewalld:
+    zone: "public"
+    port: "80/tcp"
+    permanent: "true"
+    state: "enabled"

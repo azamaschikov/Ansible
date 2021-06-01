@@ -1,0 +1,6 @@
+galaxy_info:
+  author: Alexander Zamaschikov
+  description: Telegraf + IfluxDB + Grafana
+  company: FirstVDS
+
+  license: free to use

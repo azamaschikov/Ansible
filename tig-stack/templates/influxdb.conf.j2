@@ -1,0 +1,29 @@
+#
+# Welcome to the InfluxDB configuration file
+#
+reporting-enabled = false
+
+[meta]
+  logging-enabled = true
+  retention-autocreate = true
+  dir = "/var/lib/influxdb/meta"
+
+[data]
+  dir = "/var/lib/influxdb/data"
+  wal-dir = "/var/lib/influxdb/wal"
+  series-id-set-cache-size = 100
+
+[coordinator]
+[retention]
+[shard-precreation]
+[monitor]
+[http]
+[ifql]
+[logging]
+[subscriber]
+[[graphite]]
+[[collectd]]
+[[opentsdb]]
+[[udp]]
+[continuous_queries]
+[tls]

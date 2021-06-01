@@ -1,0 +1,14 @@
+---
+- hosts: "tig"
+  gather_facts: "true"
+
+  roles:
+  - role: "tig-stack"
+
+    influxdb_base: "database"
+    influxdb_user: "username"
+    influxdb_pass: "password"
+
+    grafana_url: "https://grafana.example.com"
+    grafana_user: "username"
+    grafana_password: "password"
